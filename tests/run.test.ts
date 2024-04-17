@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import { toMinimize } from '../src/run'
 
 describe('filter to minimize', () => {

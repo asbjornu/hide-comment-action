@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import { GitHub } from '@actions/github/lib/utils'
-import { CommentsQuery } from './generated/graphql'
-import { queryComments } from './queries/comments'
-import { minimizeComment } from './queries/minimize'
+import { CommentsQuery } from './generated/graphql.js'
+import { queryComments } from './queries/comments.js'
+import { minimizeComment } from './queries/minimize.js'
 
 type Octokit = InstanceType<typeof GitHub>
 
@@ -30,8 +30,10 @@ export const run = async (inputs: Inputs): Promise<void> => {
     inputs.startsWith.length === 0 &&
     inputs.endsWith.length === 0
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const login = await getCurrentLogin(octokit)
     core.info(`no condition is given, hide comments created by user ${login}`)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     inputs.authors = [login]
   }
 
@@ -66,7 +68,9 @@ export const run = async (inputs: Inputs): Promise<void> => {
 
 const getCurrentLogin = async (octokit: Octokit) => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const { data: user } = await octokit.rest.users.getAuthenticated()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
     return user.login
   } catch (e) {
     core.warning(`could not determine the current user: ${String(e)}`)

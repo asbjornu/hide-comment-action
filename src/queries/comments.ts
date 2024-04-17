@@ -1,5 +1,5 @@
 import { GitHub } from '@actions/github/lib/utils'
-import { CommentsQuery, CommentsQueryVariables } from '../generated/graphql'
+import { CommentsQuery, CommentsQueryVariables } from '../generated/graphql.js'
 
 type Octokit = InstanceType<typeof GitHub>
 
